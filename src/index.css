@@ -1,7 +1,14 @@
 :root {
-  // TODO: add Bootstrap variables
+  /* TODO: add Bootstrap variables */
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
+  margin: 0;
   font-family: 'Mona Sans', 'Open Sans', sans-serif;
 }
