@@ -1,9 +1,8 @@
-function App() {
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes';
+
+export function App() {
   return (
-    <section>
-      <h1>Hello world!</h1>
-    </section>
+    <RouterProvider router={router} />
   );
 }
-
-export default App;
