@@ -26,7 +26,7 @@ export const SearchForm = () => {
   };
 
   return (
-    <Container className="bg-secondary p-4 rounded-3 shadow-sm bg-opacity-25">
+    <Container className="bg-secondary p-4 rounded-3 shadow-sm bg-opacity-10">
       <Form onSubmit={handleSubmit(handleFormSubmit)}>
         <Form.Label>Username do usuário</Form.Label>
 
