@@ -1,9 +1,9 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/react-query';
-import type { UserDetails, UserDetailsBySlugPayload } from '@/@types';
+import type { UserDetails, UserDetailsByUsernamePayload } from '@/@types';
 import { api } from '@/lib/api';
 import { QueryKeys } from '@/constants/tanstack-query-keys';
 
-type GetUserDetailsByUserNameQueryOptions<
+type GetUserDetailsByUsernameQueryOptions<
   TData = UserDetails,
   TError = unknown,
 > = Omit<
@@ -11,7 +11,7 @@ type GetUserDetailsByUserNameQueryOptions<
   'queryKey' | 'queryFn'
 >;
 
-export async function getUserDetailsByUsername(params: UserDetailsBySlugPayload) {
+export async function getUserDetailsByUsername(params: UserDetailsByUsernamePayload) {
   const { username } = params;
 
   const response = await api.get<UserDetails>(`/users/${username}`);
@@ -19,8 +19,8 @@ export async function getUserDetailsByUsername(params: UserDetailsBySlugPayload)
 }
 
 export const useGetUserDetailsByUsername = <TData = UserDetails, TError = unknown>(
-  params: UserDetailsBySlugPayload,
-  options?: GetUserDetailsByUserNameQueryOptions<TData, TError>,
+  params: UserDetailsByUsernamePayload,
+  options?: GetUserDetailsByUsernameQueryOptions<TData, TError>,
 ) => {
   return useQuery<UserDetails, TError, TData>({
     queryKey: [QueryKeys.UserDetails, params.username],
