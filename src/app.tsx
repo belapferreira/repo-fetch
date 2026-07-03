@@ -3,7 +3,7 @@ function App() {
     <section>
       <h1>Hello world!</h1>
     </section>
-  )
+  );
 }
 
-export default App
+export default App;
