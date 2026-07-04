@@ -8,7 +8,7 @@ type GetUserReposByUsernameQueryOptions<TData = UserReposSearchResponse, TError 
   'queryKey' | 'queryFn'
 >;
 
-export async function GetUserReposByUsername(params: UserReposByUsernamePayload) {
+export async function getUserReposByUsername(params: UserReposByUsernamePayload) {
   const { username, page, order, query } = params;
 
   const response = await api.get<UserReposSearchResponse>(
@@ -23,7 +23,7 @@ export const useGetUserReposByUsername = <TData = UserReposSearchResponse, TErro
 ) => {
   return useQuery<UserReposSearchResponse, TError, TData>({
     queryKey: [QueryKeys.UserRepos, params],
-    queryFn: () => GetUserReposByUsername(params),
+    queryFn: () => getUserReposByUsername(params),
     ...options,
   });
 };
