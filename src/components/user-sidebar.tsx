@@ -16,6 +16,7 @@ const UserSidebarPlaceholder = () => {
           width: 160,
           height: 160,
         }}
+        data-testid="user-sidebar-placeholder-avatar"
       />
 
       <div className="placeholder col-6 mb-2" />

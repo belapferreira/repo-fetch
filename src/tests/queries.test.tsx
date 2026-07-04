@@ -1,40 +1,17 @@
-import type { ReactNode } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '@/providers/query-client.provider';
 import { api } from '@/lib/api';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useGetUserDetailsByUsername } from '@/api/queries/get-user-details-by-username';
 import { useGetUserReposByUsername } from '@/api/queries/get-user-repos-by-username';
 import { useGetRepositoryByName } from '@/api/queries/get-repo-details-by-name';
 import { useGetRepositoryReadmeByName } from '@/api/queries/get-repo-readme-by-name';
+import { username, mockUserDetails, mockRepoDetails, createQueryClientMock } from './mocks';
 
-vi.mock('../lib/api', () => ({
+vi.mock('@/lib/api', () => ({
   api: {
     get: vi.fn(),
   },
 }));
-
-const username = 'octocat';
-
-const mockRepoDetails = {
-  id: 123456,
-  name: 'Hello-World',
-  html_url: 'https://github.com/octocat/Hello-World',
-  description: 'This your first repo!',
-  stargazers_count: 0,
-  language: null,
-  private: false,
-  topics: [],
-  visibility: 'public',
-  license: null,
-};
-
-const createQueryClientMock = () => {
-  return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
 
 describe('Queries testing', () => {
   beforeEach(() => {
@@ -42,17 +19,6 @@ describe('Queries testing', () => {
   });
 
   it('should get the user details from the API', async () => {
-    const mockUserDetails = {
-      login: 'octocat',
-      avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
-      html_url: 'https://github.com/octocat',
-      name: 'The Octocat',
-      bio: 'There once was...',
-      followers: 42,
-      following: 13,
-      email: null,
-    };
-
     const mockGetUserDetails = vi.mocked(api.get);
     mockGetUserDetails.mockResolvedValue({ data: mockUserDetails });
 
