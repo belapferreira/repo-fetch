@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-import logo from '@/assets/repo-fetch-logo.svg';
-import github from '@/assets/github.svg';
+import logo from '../assets/repo-fetch-logo.svg';
+import github from '../assets/github.svg';
 
 export const Header = () => {
   return (
