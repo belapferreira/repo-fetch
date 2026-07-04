@@ -16,7 +16,7 @@ export const RepositoriesList = () => {
   const navigate = useNavigate();
 
   if (!username) {
-    navigate(`/${username}/not-found`, { replace: true });
+    navigate(`/user/${username}/not-found`, { replace: true });
   }
 
   const {
@@ -26,7 +26,7 @@ export const RepositoriesList = () => {
   } = useGetUserDetailsByUsername({ username: username as string }, { enabled: !!username });
 
   if (isErrorUserDetails) {
-    navigate(`/${username}/not-found`, { replace: true });
+    navigate(`/user/${username}/not-found`, { replace: true });
   }
 
   const { data: userRepos, isLoading: isLoadingUserRepos } = useGetUserReposByUsername(

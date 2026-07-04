@@ -10,11 +10,11 @@ export const NotFound = () => {
         >
           <img src="/src/assets/not-found-404.svg" alt="404" width={194} height={85} />
 
-          <h1 className="fs-3">Username não encontrado</h1>
+          <h1 className="fs-3">Não encontrado</h1>
 
           <p className="text-center">
-            O usuário que você está procurando não existe ou não está disponível. Verifique o username e tente novamente
-            em <a href="/">RepoFetch</a>.
+            A página que você está procurando não existe ou não está disponível. Verifique os dados e tente novamente em{' '}
+            <a href="/">RepoFetch</a>.
           </p>
         </Card>
       </Container>

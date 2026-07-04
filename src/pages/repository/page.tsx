@@ -10,13 +10,21 @@ export const Repository = () => {
   const navigate = useNavigate();
 
   if (!repository || !username) {
-    navigate(`/${repository}/not-found`, { replace: true });
+    navigate(`/repository/${repository}/not-found`, { replace: true });
   }
 
-  const { data: repoDetails, isLoading: isLoadingRepoDetails } = useGetRepositoryByName(
+  const {
+    data: repoDetails,
+    isLoading: isLoadingRepoDetails,
+    isError: isErrorRepoDetails,
+  } = useGetRepositoryByName(
     { username: username as string, repository: repository as string },
     { enabled: !!repository && !!username },
   );
+
+  if (isErrorRepoDetails) {
+    navigate(`/repository/${username}/not-found`, { replace: true });
+  }
 
   const { data: readme, isLoading: isLoadingReadme } = useGetRepositoryReadmeByName(
     { username: username as string, repository: repository as string },
