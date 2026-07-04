@@ -11,17 +11,16 @@ export const AppLayout = () => {
 
         <main
           className="d-flex flex-column flex-grow-1 h-100"
-          style={
-            {
-              backgroundImage: 'url(./src/assets/background-with-github-symbol.png)',
-              backgroundRepeat: 'no-repeat', backgroundSize: 'cover',
-              backgroundPosition: 'right',
-            }
-          }>
-
+          style={{
+            backgroundImage: 'url(./src/assets/background-with-github-symbol.png)',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'right',
+          }}
+        >
           <Outlet />
         </main>
       </div>
-    </QueryClientProvider >
+    </QueryClientProvider>
   );
 };

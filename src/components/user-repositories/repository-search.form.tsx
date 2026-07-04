@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback, useEffect } from 'react';
 import { debounce } from 'lodash';
 
-type SearchFormData = z.infer<typeof schema>
+type SearchFormData = z.infer<typeof schema>;
 
 interface RepositorySearchFormProps {
   onSearch?: (query: string) => void;
@@ -16,7 +16,11 @@ interface RepositorySearchFormProps {
 export const RepositorySearchForm = (props: RepositorySearchFormProps) => {
   const { onSearch } = props;
 
-  const { register, watch, formState: { errors } } = useForm<SearchFormData>({
+  const {
+    register,
+    watch,
+    formState: { errors },
+  } = useForm<SearchFormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       repository: '',
@@ -25,11 +29,17 @@ export const RepositorySearchForm = (props: RepositorySearchFormProps) => {
 
   const repositoryValue = watch('repository');
 
-  const debouncedSearch = debounce(useCallback((query: string) => {
-    if (onSearch) {
-      onSearch(query);
-    }
-  }, [onSearch]), 300);
+  const debouncedSearch = debounce(
+    useCallback(
+      (query: string) => {
+        if (onSearch) {
+          onSearch(query);
+        }
+      },
+      [onSearch],
+    ),
+    300,
+  );
 
   useEffect(() => {
     debouncedSearch(repositoryValue);
@@ -50,7 +60,6 @@ export const RepositorySearchForm = (props: RepositorySearchFormProps) => {
               {...register('repository')}
               className={errors.repository ? 'is-invalid' : ''}
             />
-
           </InputGroup>
         </Container>
 

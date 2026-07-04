@@ -6,12 +6,17 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 
-type SearchFormData = z.infer<typeof schema>
+type SearchFormData = z.infer<typeof schema>;
 
 export const SearchForm = () => {
   const navigate = useNavigate();
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<SearchFormData>({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<SearchFormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       username: '',
@@ -43,7 +48,6 @@ export const SearchForm = () => {
                 {...register('username')}
                 className={errors.username ? 'is-invalid' : ''}
               />
-
             </InputGroup>
 
             <Button type="submit" variant="primary" disabled={isSubmitButtonDisabled}>
@@ -59,6 +63,5 @@ export const SearchForm = () => {
         </Form.Group>
       </Form>
     </Container>
-
   );
 };

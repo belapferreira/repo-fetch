@@ -3,10 +3,7 @@ import type { Repository, RepoDetailsByNamePayload } from '@/@types';
 import { api } from '@/lib/api';
 import { QueryKeys } from '@/constants/tanstack-query-keys';
 
-type GetRepositoryByNameQueryOptions<
-  TData = Repository,
-  TError = unknown,
-> = Omit<
+type GetRepositoryByNameQueryOptions<TData = Repository, TError = unknown> = Omit<
   UseQueryOptions<Repository, TError, TData>,
   'queryKey' | 'queryFn'
 >;

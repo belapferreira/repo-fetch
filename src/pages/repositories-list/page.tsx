@@ -19,13 +19,20 @@ export const RepositoriesList = () => {
     navigate(`/${username}/not-found`, { replace: true });
   }
 
-  const { data: userDetails, isLoading: isLoadingUserDetails, isError: isErrorUserDetails } = useGetUserDetailsByUsername({ username: username as string }, { enabled: !!username });
+  const {
+    data: userDetails,
+    isLoading: isLoadingUserDetails,
+    isError: isErrorUserDetails,
+  } = useGetUserDetailsByUsername({ username: username as string }, { enabled: !!username });
 
   if (isErrorUserDetails) {
     navigate(`/${username}/not-found`, { replace: true });
   }
 
-  const { data: userRepos, isLoading: isLoadingUserRepos } = useGetUserReposByUsername({ username: username as string, page, order, query }, { enabled: !!username });
+  const { data: userRepos, isLoading: isLoadingUserRepos } = useGetUserReposByUsername(
+    { username: username as string, page, order, query },
+    { enabled: !!username },
+  );
 
   const totalPages = userRepos?.total_count ? Math.ceil(userRepos.total_count / 10) : 0; // 10 items per page
 
@@ -63,8 +70,17 @@ export const RepositoriesList = () => {
       <Container className="mb-5 d-flex flex-column flex-md-row">
         <UserSidebar userDetails={userDetails as UserDetails} isLoading={isLoadingUserDetails} />
 
-        <UserRepositories userRepos={userRepos?.items as Repository[]} currentOrder={order} isLoading={isLoadingUserRepos} hasPreviousPage={hasPreviousPage} hasNextPage={hasNextPage} handlePreviousPage={handlePreviousPage} handleNextPage={handleNextPage} handleQueryChange={handleQueryChange} handleOrderChange={handleOrderChange} />
-
+        <UserRepositories
+          userRepos={userRepos?.items as Repository[]}
+          currentOrder={order}
+          isLoading={isLoadingUserRepos}
+          hasPreviousPage={hasPreviousPage}
+          hasNextPage={hasNextPage}
+          handlePreviousPage={handlePreviousPage}
+          handleNextPage={handleNextPage}
+          handleQueryChange={handleQueryChange}
+          handleOrderChange={handleOrderChange}
+        />
       </Container>
     </section>
   );

@@ -3,10 +3,7 @@ import type { UserReposSearchResponse, UserReposByUsernamePayload } from '@/@typ
 import { api } from '@/lib/api';
 import { QueryKeys } from '@/constants/tanstack-query-keys';
 
-type GetUserReposByUsernameQueryOptions<
-  TData = UserReposSearchResponse,
-  TError = unknown,
-> = Omit<
+type GetUserReposByUsernameQueryOptions<TData = UserReposSearchResponse, TError = unknown> = Omit<
   UseQueryOptions<UserReposSearchResponse, TError, TData>,
   'queryKey' | 'queryFn'
 >;
@@ -14,7 +11,9 @@ type GetUserReposByUsernameQueryOptions<
 export async function GetUserReposByUsername(params: UserReposByUsernamePayload) {
   const { username, page, order, query } = params;
 
-  const response = await api.get<UserReposSearchResponse>(`/search/repositories?q=${query ? `${query}+` : ''}user:${username}&sort=stars&order=${order}&per_page=10&page=${page}`);
+  const response = await api.get<UserReposSearchResponse>(
+    `/search/repositories?q=${query ? `${query}+` : ''}user:${username}&sort=stars&order=${order}&per_page=10&page=${page}`,
+  );
   return response.data;
 }
 

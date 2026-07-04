@@ -10,7 +10,13 @@ export const Header = () => {
         </Link>
 
         <a href="https://github.com/belapferreira/repo-fetch" target="_blank" rel="noopener noreferrer">
-          <img src="/src/assets/github.svg" width="36" height="36" alt="Repositório no GitHub" title="Repositório no GitHub" />
+          <img
+            src="/src/assets/github.svg"
+            width="36"
+            height="36"
+            alt="Repositório no GitHub"
+            title="Repositório no GitHub"
+          />
         </a>
       </Container>
     </header>

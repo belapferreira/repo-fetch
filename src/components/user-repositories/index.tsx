@@ -31,7 +31,17 @@ const UserRepositoriesPlaceholder = () => {
 };
 
 export const UserRepositories = (props: UserSidebarProps) => {
-  const { userRepos, isLoading, currentOrder, hasPreviousPage, hasNextPage, handlePreviousPage, handleNextPage, handleOrderChange, handleQueryChange } = props;
+  const {
+    userRepos,
+    isLoading,
+    currentOrder,
+    hasPreviousPage,
+    hasNextPage,
+    handlePreviousPage,
+    handleNextPage,
+    handleOrderChange,
+    handleQueryChange,
+  } = props;
 
   const { username } = useParams();
 
@@ -65,16 +75,23 @@ export const UserRepositories = (props: UserSidebarProps) => {
             ) : (
               <Container className="d-flex flex-column gap-4 mt-3 w-100 p-0">
                 {userRepos?.map((repo) => (
-                  <Container key={repo.id} className="d-flex flex-column p-0 gap-2 border-bottom border-secondary border-opacity-25 pb-3">
+                  <Container
+                    key={repo.id}
+                    className="d-flex flex-column p-0 gap-2 border-bottom border-secondary border-opacity-25 pb-3"
+                  >
                     <Stack direction="horizontal" gap={2}>
                       <Link to={`/${username}/${repo.name}`} className="text-decoration-none">
                         <strong className="fs-6">{repo.name}</strong>
                       </Link>
 
-                      <Badge pill bg="dark">{repo?.visibility === 'private' ? 'Privado' : 'Público'}</Badge>
+                      <Badge pill bg="dark">
+                        {repo?.visibility === 'private' ? 'Privado' : 'Público'}
+                      </Badge>
 
                       {repo.language && (
-                        <Badge bg="secondary" className="bg-opacity-25">{repo.language}</Badge>
+                        <Badge bg="secondary" className="bg-opacity-25">
+                          {repo.language}
+                        </Badge>
                       )}
 
                       {!!repo.stargazers_count && (
@@ -91,7 +108,12 @@ export const UserRepositories = (props: UserSidebarProps) => {
                     {!!repo?.topics?.length && (
                       <Stack direction="horizontal" gap={2} className="d-flex flex-row flex-wrap mt-1">
                         {repo.topics.map((topic) => (
-                          <Badge key={topic} pill bg="dark" className="text-truncate bg-opacity-25 border border-tertiary text-body">
+                          <Badge
+                            key={topic}
+                            pill
+                            bg="dark"
+                            className="text-truncate bg-opacity-25 border border-tertiary text-body"
+                          >
                             {topic}
                           </Badge>
                         ))}
@@ -99,8 +121,7 @@ export const UserRepositories = (props: UserSidebarProps) => {
                     )}
                   </Container>
                 ))}
-
-              </Container >
+              </Container>
             )}
           </>
         )}
@@ -108,15 +129,23 @@ export const UserRepositories = (props: UserSidebarProps) => {
 
       {!isEmpty && (
         <Container className="d-flex gap-3 mt-2 p-0 justify-content-center flex-wrap">
-          <Button variant="link" disabled={!hasPreviousPage} onClick={handlePreviousPage} className="d-flex gap-1 align-items-center text-decoration-none">
+          <Button
+            variant="link"
+            disabled={!hasPreviousPage}
+            onClick={handlePreviousPage}
+            className="d-flex gap-1 align-items-center text-decoration-none"
+          >
             <ChevronLeft size={16} />
-
             Anterior
           </Button>
 
-          <Button variant="link" disabled={!hasNextPage} onClick={handleNextPage} className="d-flex gap-1 align-items-center text-decoration-none">
+          <Button
+            variant="link"
+            disabled={!hasNextPage}
+            onClick={handleNextPage}
+            className="d-flex gap-1 align-items-center text-decoration-none"
+          >
             Seguinte
-
             <ChevronRight size={16} />
           </Button>
         </Container>

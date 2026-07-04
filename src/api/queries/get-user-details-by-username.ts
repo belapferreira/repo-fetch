@@ -3,10 +3,7 @@ import type { UserDetails, UserDetailsByUsernamePayload } from '@/@types';
 import { api } from '@/lib/api';
 import { QueryKeys } from '@/constants/tanstack-query-keys';
 
-type GetUserDetailsByUsernameQueryOptions<
-  TData = UserDetails,
-  TError = unknown,
-> = Omit<
+type GetUserDetailsByUsernameQueryOptions<TData = UserDetails, TError = unknown> = Omit<
   UseQueryOptions<UserDetails, TError, TData>,
   'queryKey' | 'queryFn'
 >;

@@ -47,27 +47,39 @@ export const UserSidebar = (props: UserSidebarProps) => {
               <Image src={userDetails?.avatar_url} alt={userDetails?.name} width={160} height={160} roundedCircle />
             </a>
 
-            <a href={userDetails?.html_url} title={userDetails?.html_url} target="_blank" rel="noopener noreferrer" className="d-flex flex-column align-items-center text-decoration-none text-body">
+            <a
+              href={userDetails?.html_url}
+              title={userDetails?.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="d-flex flex-column align-items-center text-decoration-none text-body"
+            >
               <strong className="fs-5">{userDetails?.name}</strong>
               <small>{userDetails?.email}</small>
               <small>{userDetails?.login}</small>
             </a>
 
-            {userDetails?.bio && <p className="text-muted mt-3">
-              <small>{userDetails?.bio}</small>
-            </p>}
+            {userDetails?.bio && (
+              <p className="text-muted mt-3">
+                <small>{userDetails?.bio}</small>
+              </p>
+            )}
 
             <Container className="d-flex mt-1 p-0 gap-2 align-items-center">
               <div className="d-flex align-items-center gap-1 p-0">
                 <Users size={14} />
-                <strong><small>{userDetails?.followers || 0}</small></strong>
+                <strong>
+                  <small>{userDetails?.followers || 0}</small>
+                </strong>
                 <small className="text-muted">Seguidores</small>
               </div>
 
               <small className="text-muted">•</small>
 
               <div className="d-flex align-items-center gap-1 p-0">
-                <strong><small>{userDetails?.following || 0}</small></strong>
+                <strong>
+                  <small>{userDetails?.following || 0}</small>
+                </strong>
                 <small className="text-muted">Seguindo</small>
               </div>
             </Container>
