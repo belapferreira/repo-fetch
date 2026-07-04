@@ -11,10 +11,11 @@ type SearchFormData = z.infer<typeof schema>;
 
 interface RepositorySearchFormProps {
   onSearch?: (query: string) => void;
+  isDisabled?: boolean;
 }
 
 export const RepositorySearchForm = (props: RepositorySearchFormProps) => {
-  const { onSearch } = props;
+  const { onSearch, isDisabled } = props;
 
   const {
     register,
@@ -56,6 +57,7 @@ export const RepositorySearchForm = (props: RepositorySearchFormProps) => {
 
             <Form.Control
               type="text"
+              disabled={isDisabled}
               placeholder="Digite o repositório"
               {...register('repository')}
               className={errors.repository ? 'is-invalid' : ''}

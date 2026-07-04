@@ -4,14 +4,20 @@ import { Dropdown } from 'react-bootstrap';
 interface StarsSortDropdownProps {
   onOrderChange?: (newOrder: 'asc' | 'desc') => void;
   currentOrder?: 'asc' | 'desc';
+  isDisabled?: boolean;
 }
 
 export const StarsSortDropdown = (props: StarsSortDropdownProps) => {
-  const { currentOrder, onOrderChange } = props;
+  const { currentOrder, onOrderChange, isDisabled } = props;
 
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="secondary" id="dropdown-stars-sort" className="bg-dark border-dark">
+      <Dropdown.Toggle
+        disabled={isDisabled}
+        variant="secondary"
+        id="dropdown-stars-sort"
+        className="bg-dark border-dark"
+      >
         <ArrowDownUp size={16} />
       </Dropdown.Toggle>
 

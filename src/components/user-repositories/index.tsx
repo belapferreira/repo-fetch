@@ -53,9 +53,13 @@ export const UserRepositories = (props: UserSidebarProps) => {
     <Container className="d-flex flex-column w-100">
       <Card className="d-flex p-4 align-items-center border-0 bg-secondary bg-opacity-10 shadow-sm rounded-3">
         <Container className="d-flex flex-row gap-4 w-100 p-0 mb-4">
-          <RepositorySearchForm onSearch={handleQueryChange} />
+          <RepositorySearchForm isDisabled={isEmpty || isLoading} onSearch={handleQueryChange} />
 
-          <StarsSortDropdown currentOrder={currentOrder} onOrderChange={handleOrderChange} />
+          <StarsSortDropdown
+            currentOrder={currentOrder}
+            isDisabled={isEmpty || isLoading}
+            onOrderChange={handleOrderChange}
+          />
         </Container>
 
         {isLoading ? (
