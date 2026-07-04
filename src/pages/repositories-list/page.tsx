@@ -45,13 +45,17 @@ export const RepositoriesList = () => {
   };
 
   const handleOrderChange = (newOrder: 'asc' | 'desc') => {
-    setOrder(newOrder);
-    setPage(1);
+    if (newOrder !== order) {
+      setOrder(newOrder);
+      setPage(1);
+    }
   };
 
   const handleQueryChange = (newQuery: string) => {
-    setQuery(newQuery);
-    setPage(1);
+    if (newQuery !== query) {
+      setQuery(newQuery);
+      setPage(1);
+    }
   };
 
   return (
