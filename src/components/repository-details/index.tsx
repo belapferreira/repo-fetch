@@ -1,14 +1,14 @@
-import type { Repository, RepositoryReadme } from '@/@types';
+import type { Repository, RepositoryReadme as RepositoryReadmeType } from '@/@types';
 import { FolderOpen, Star } from 'lucide-react';
-import { Badge, Breadcrumb, Button, Card, Container, Image, Stack } from 'react-bootstrap';
+import { Badge, Button, Card, Container, Stack } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
+
+import { RepositoryReadme } from './repository-readme';
+import { Breadcrumbs } from './breadcrumbs';
 
 interface RepositoryDetailsProps {
   repoDetails: Repository;
-  repoReadme?: RepositoryReadme;
+  repoReadme?: RepositoryReadmeType;
   isLoadingDetails: boolean;
   isLoadingReadme: boolean;
 }
@@ -32,15 +32,7 @@ export const RepositoryDetails = (props: RepositoryDetailsProps) => {
 
   return (
     <Container className="d-flex flex-column w-100 placeholder-glow">
-      <Breadcrumb className="d-flex flex-row align-items-center gap-2">
-        <Breadcrumb.Item href={`/${username}`}>
-          <Image src={`https://github.com/${username}.png`} alt={username} width={28} height={28} roundedCircle />
-          {username}
-        </Breadcrumb.Item>
-        <Breadcrumb.Item active className="text-muted text-decoration-none">
-          {repository}
-        </Breadcrumb.Item>
-      </Breadcrumb>
+      <Breadcrumbs username={username as string} repository={repository as string} />
 
       <Card className="d-flex flex-column gap-3 p-4 border-0 bg-secondary bg-opacity-10 shadow-sm rounded-3">
         {isLoadingDetails ? (
@@ -116,21 +108,11 @@ export const RepositoryDetails = (props: RepositoryDetailsProps) => {
         ) : (
           <>
             {repoReadme?.content ? (
-              <Markdown
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeRaw]}
-                components={{
-                  img({ src, ...props }) {
-                    const imageSrc = src?.startsWith('http')
-                      ? src
-                      : `https://raw.githubusercontent.com/${username}/${repository}/HEAD/${src}`;
-
-                    return <img {...props} src={imageSrc} />;
-                  },
-                }}
-              >
-                {repoReadme?.content}
-              </Markdown>
+              <RepositoryReadme
+                content={repoReadme.content}
+                username={username as string}
+                repository={repository as string}
+              />
             ) : (
               <Container className="d-flex flex-column align-items-center justify-content-center gap-2 w-100 text-muted p-5">
                 <FolderOpen size={32} />
