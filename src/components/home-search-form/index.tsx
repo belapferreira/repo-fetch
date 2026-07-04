@@ -1,14 +1,14 @@
 import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import type z from 'zod';
 import { Search } from 'lucide-react';
-import { schema } from './search.schema';
+import { schema } from './home-search.schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 
-type SearchFormData = z.infer<typeof schema>;
+type HomeSearchFormData = z.infer<typeof schema>;
 
-export const SearchForm = () => {
+export const HomeSearchForm = () => {
   const navigate = useNavigate();
 
   const {
@@ -16,7 +16,7 @@ export const SearchForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<SearchFormData>({
+  } = useForm<HomeSearchFormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       username: '',
@@ -26,7 +26,7 @@ export const SearchForm = () => {
   const usernameValue = watch('username');
   const isSubmitButtonDisabled = !usernameValue || usernameValue.trim().length === 0;
 
-  const handleFormSubmit = (data: SearchFormData) => {
+  const handleFormSubmit = (data: HomeSearchFormData) => {
     navigate(`/${data.username}`);
   };
 

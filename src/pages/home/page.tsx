@@ -1,4 +1,4 @@
-import { SearchForm } from '@/components/search-form/search.form';
+import { HomeSearchForm } from '@/components/home-search-form';
 import { Container } from 'react-bootstrap';
 
 export const Home = () => {
@@ -9,7 +9,7 @@ export const Home = () => {
         <p>Consultar repositórios hospedados no GitHub através de um username</p>
       </Container>
 
-      <SearchForm />
+      <HomeSearchForm />
     </section>
   );
 };
