@@ -12,3 +12,18 @@ body {
   margin: 0;
   font-family: 'Mona Sans', 'Open Sans', sans-serif;
 }
+
+.breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.125rem;
+}
+
+.breadcrumb-item > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--bs-body);
+  font-weight: 500;
+  text-decoration: none;
+}

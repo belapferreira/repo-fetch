@@ -1,12 +1,13 @@
-import type { UserRepos } from '@/@types';
+import type { Repository } from '@/@types';
 import { ChevronLeft, ChevronRight, FolderOpen, Star } from 'lucide-react';
 import { Badge, Button, Card, Container, Stack } from 'react-bootstrap';
 import { RepositorySearchForm } from './repository-search.form';
 import { StarsSortDropdown } from './stars-sort.dropdown';
 import { generateArray } from '@/utils/generate-array';
+import { Link, useParams } from 'react-router-dom';
 
 type UserSidebarProps = {
-  userRepos: UserRepos[];
+  userRepos: Repository[];
   isLoading?: boolean;
   currentOrder?: 'asc' | 'desc';
   hasPreviousPage?: boolean;
@@ -31,6 +32,8 @@ const UserRepositoriesPlaceholder = () => {
 
 export const UserRepositories = (props: UserSidebarProps) => {
   const { userRepos, isLoading, currentOrder, hasPreviousPage, hasNextPage, handlePreviousPage, handleNextPage, handleOrderChange, handleQueryChange } = props;
+
+  const { username } = useParams();
 
   const isEmpty = !userRepos?.length && !isLoading;
 
@@ -64,11 +67,11 @@ export const UserRepositories = (props: UserSidebarProps) => {
                 {userRepos?.map((repo) => (
                   <Container key={repo.id} className="d-flex flex-column p-0 gap-2 border-bottom border-secondary border-opacity-25 pb-3">
                     <Stack direction="horizontal" gap={2}>
-                      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                      <Link to={`/${username}/${repo.name}`} className="text-decoration-none">
                         <strong className="fs-6">{repo.name}</strong>
-                      </a>
+                      </Link>
 
-                      <Badge pill bg="dark">{repo?.visibility === 'private' ? 'Privado' : 'Publico'}</Badge>
+                      <Badge pill bg="dark">{repo?.visibility === 'private' ? 'Privado' : 'Público'}</Badge>
 
                       {repo.language && (
                         <Badge bg="secondary" className="bg-opacity-25">{repo.language}</Badge>

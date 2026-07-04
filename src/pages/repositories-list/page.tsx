@@ -1,4 +1,4 @@
-import type { UserDetails, UserRepos } from '@/@types';
+import type { UserDetails, Repository } from '@/@types';
 import { useGetUserDetailsByUsername } from '@/api/queries/get-user-details-by-username';
 import { useGetUserReposByUsername } from '@/api/queries/get-user-repos-by-username';
 import { UserRepositories } from '@/components/user-repositories/index';
@@ -63,7 +63,7 @@ export const RepositoriesList = () => {
       <Container className="mb-5 d-flex flex-column flex-md-row">
         <UserSidebar userDetails={userDetails as UserDetails} isLoading={isLoadingUserDetails} />
 
-        <UserRepositories userRepos={userRepos?.items as UserRepos[]} currentOrder={order} isLoading={isLoadingUserRepos} hasPreviousPage={hasPreviousPage} hasNextPage={hasNextPage} handlePreviousPage={handlePreviousPage} handleNextPage={handleNextPage} handleQueryChange={handleQueryChange} handleOrderChange={handleOrderChange} />
+        <UserRepositories userRepos={userRepos?.items as Repository[]} currentOrder={order} isLoading={isLoadingUserRepos} hasPreviousPage={hasPreviousPage} hasNextPage={hasNextPage} handlePreviousPage={handlePreviousPage} handleNextPage={handleNextPage} handleQueryChange={handleQueryChange} handleOrderChange={handleOrderChange} />
 
       </Container>
     </section>

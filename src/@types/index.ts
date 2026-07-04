@@ -9,7 +9,7 @@ export interface UserDetails {
   email: string | null;
 }
 
-export interface UserRepos {
+export interface Repository {
   id: number;
   name: string;
   html_url: string;
@@ -26,7 +26,7 @@ export interface UserRepos {
 
 export interface UserReposSearchResponse {
   total_count: number;
-  items: UserRepos[];
+  items: Repository[];
 }
 
 export interface UserDetailsByUsernamePayload {
@@ -38,4 +38,9 @@ export interface UserReposByUsernamePayload {
   page?: number;
   order?: 'asc' | 'desc';
   query?: string;
+}
+
+export interface RepoDetailsByNamePayload {
+  username: string;
+  repository: string;
 }

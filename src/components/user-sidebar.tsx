@@ -49,6 +49,7 @@ export const UserSidebar = (props: UserSidebarProps) => {
 
             <a href={userDetails?.html_url} title={userDetails?.html_url} target="_blank" rel="noopener noreferrer" className="d-flex flex-column align-items-center text-decoration-none text-body">
               <strong className="fs-5">{userDetails?.name}</strong>
+              <small>{userDetails?.email}</small>
               <small>{userDetails?.login}</small>
             </a>
 
