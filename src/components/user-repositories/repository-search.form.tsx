@@ -1,14 +1,22 @@
-import { Button, Container, Form, InputGroup } from 'react-bootstrap';
+import { Container, Form, InputGroup } from 'react-bootstrap';
 import type z from 'zod';
 import { Search } from 'lucide-react';
 import { schema } from './repository-search.schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useCallback, useEffect } from 'react';
+import { debounce } from 'lodash';
 
 type SearchFormData = z.infer<typeof schema>
 
-export const RepositorySearchForm = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<SearchFormData>({
+interface RepositorySearchFormProps {
+  onSearch?: (query: string) => void;
+}
+
+export const RepositorySearchForm = (props: RepositorySearchFormProps) => {
+  const { onSearch } = props;
+
+  const { register, watch, formState: { errors } } = useForm<SearchFormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       repository: '',
@@ -16,14 +24,19 @@ export const RepositorySearchForm = () => {
   });
 
   const repositoryValue = watch('repository');
-  const isSubmitButtonDisabled = !repositoryValue || repositoryValue.trim().length === 0;
 
-  const handleFormSubmit = (data: SearchFormData) => {
-    console.log(data);
-  };
+  const debouncedSearch = debounce(useCallback((query: string) => {
+    if (onSearch) {
+      onSearch(query);
+    }
+  }, [onSearch]), 300);
+
+  useEffect(() => {
+    debouncedSearch(repositoryValue);
+  }, [repositoryValue, debouncedSearch]);
 
   return (
-    <Form onSubmit={handleSubmit(handleFormSubmit)} className="w-100">
+    <Form className="w-100">
       <Form.Group>
         <Container className="d-flex gap-2 px-0">
           <InputGroup className={`input-group-${errors.repository ? 'is-invalid' : ''}`}>
@@ -39,10 +52,6 @@ export const RepositorySearchForm = () => {
             />
 
           </InputGroup>
-
-          <Button type="submit" variant="primary" disabled={isSubmitButtonDisabled}>
-            Buscar
-          </Button>
         </Container>
 
         {errors.repository && (

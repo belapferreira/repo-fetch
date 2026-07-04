@@ -23,7 +23,7 @@ export const useGetUserDetailsByUsername = <TData = UserDetails, TError = unknow
   options?: GetUserDetailsByUsernameQueryOptions<TData, TError>,
 ) => {
   return useQuery<UserDetails, TError, TData>({
-    queryKey: [QueryKeys.UserDetails, params.username],
+    queryKey: [QueryKeys.UserDetails, params],
     queryFn: () => getUserDetailsByUsername(params),
     ...options,
   });

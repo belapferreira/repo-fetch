@@ -1,7 +1,14 @@
 import { ArrowDownUp } from 'lucide-react';
 import { Dropdown } from 'react-bootstrap';
 
-export const StarsSortDropdown = () => {
+interface StarsSortDropdownProps {
+  onOrderChange?: (newOrder: 'asc' | 'desc') => void;
+  currentOrder?: 'asc' | 'desc';
+}
+
+export const StarsSortDropdown = (props: StarsSortDropdownProps) => {
+  const { currentOrder, onOrderChange } = props;
+
   return (
     <Dropdown>
       <Dropdown.Toggle variant="secondary" id="dropdown-stars-sort" className="bg-dark border-dark">
@@ -9,8 +16,12 @@ export const StarsSortDropdown = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Mais estrelas</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Menos estrelas</Dropdown.Item>
+        <Dropdown.Item onClick={() => onOrderChange?.('desc')} active={currentOrder === 'desc'}>
+          Mais estrelas
+        </Dropdown.Item>
+        <Dropdown.Item onClick={() => onOrderChange?.('asc')} active={currentOrder === 'asc'}>
+          Menos estrelas
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

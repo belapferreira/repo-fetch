@@ -8,10 +8,13 @@ import { generateArray } from '@/utils/generate-array';
 type UserSidebarProps = {
   userRepos: UserRepos[];
   isLoading?: boolean;
+  currentOrder?: 'asc' | 'desc';
   hasPreviousPage?: boolean;
   hasNextPage?: boolean;
   handlePreviousPage?: () => void;
   handleNextPage?: () => void;
+  handleOrderChange?: (newOrder: 'asc' | 'desc') => void;
+  handleQueryChange?: (newQuery: string) => void;
 };
 
 const UserRepositoriesPlaceholder = () => {
@@ -27,7 +30,7 @@ const UserRepositoriesPlaceholder = () => {
 };
 
 export const UserRepositories = (props: UserSidebarProps) => {
-  const { userRepos, isLoading, hasPreviousPage, hasNextPage, handlePreviousPage, handleNextPage } = props;
+  const { userRepos, isLoading, currentOrder, hasPreviousPage, hasNextPage, handlePreviousPage, handleNextPage, handleOrderChange, handleQueryChange } = props;
 
   const isEmpty = !userRepos?.length && !isLoading;
 
@@ -37,9 +40,9 @@ export const UserRepositories = (props: UserSidebarProps) => {
     <Container className="d-flex flex-column w-100">
       <Card className="d-flex p-4 align-items-center border-0 bg-secondary bg-opacity-10 shadow-sm rounded-3">
         <Container className="d-flex flex-row gap-4 w-100 p-0 mb-4">
-          <RepositorySearchForm />
+          <RepositorySearchForm onSearch={handleQueryChange} />
 
-          <StarsSortDropdown />
+          <StarsSortDropdown currentOrder={currentOrder} onOrderChange={handleOrderChange} />
         </Container>
 
         {isLoading ? (

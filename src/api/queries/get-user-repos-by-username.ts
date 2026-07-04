@@ -23,7 +23,7 @@ export const useGetUserReposByUsername = <TData = UserReposSearchResponse, TErro
   options?: GetUserReposByUsernameQueryOptions<TData, TError>,
 ) => {
   return useQuery<UserReposSearchResponse, TError, TData>({
-    queryKey: [QueryKeys.UserRepos, params.username],
+    queryKey: [QueryKeys.UserRepos, params],
     queryFn: () => GetUserReposByUsername(params),
     ...options,
   });
