@@ -1,11 +1,13 @@
 import { AppLayout } from '@/layouts/app.layout';
 import { queryClient } from '@/providers/query-client.provider';
+import { router } from '@/routes';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
 export const username = 'octocat';
+export const repository = 'Hello-World';
 
 export const mockUserDetails = {
   login: 'octocat',
@@ -56,4 +58,8 @@ export const renderWithRouter = (ui: ReactNode, path: string, route: string) => 
   );
 
   return render(<RouterProvider router={router} />);
+};
+
+export const RouterProviderRender = () => {
+  return <RouterProvider router={router} />;
 };

@@ -15,7 +15,7 @@ interface RepositoryDetailsProps {
 
 const RepositoryDetailsPlaceholder = () => {
   return (
-    <Container className="d-flex flex-column p-0 gap-3 placeholder-glow">
+    <Container data-testid="repo-details-placeholder" className="d-flex flex-column p-0 gap-3 placeholder-glow">
       <div className="placeholder w-50 mb-2" style={{ height: '2.25rem' }} />
 
       <div className="placeholder w-75 mb-2" style={{ height: '1.5rem' }} />
@@ -41,7 +41,9 @@ export const RepositoryDetails = (props: RepositoryDetailsProps) => {
           <Stack direction="horizontal" gap={3} className="align-items-center flex-wrap">
             <Stack direction="vertical" gap={3}>
               <Stack direction="horizontal" gap={2} className="flex-wrap">
-                <Card.Title className="fs-4 fw-bold">{repoDetails?.name}</Card.Title>
+                <Card.Title data-testid="repository-name" className="fs-4 fw-bold">
+                  {repoDetails?.name}
+                </Card.Title>
 
                 <Badge pill bg="dark">
                   {repoDetails?.visibility === 'private' ? 'Privado' : 'Público'}
@@ -62,7 +64,9 @@ export const RepositoryDetails = (props: RepositoryDetailsProps) => {
                 )}
               </Stack>
 
-              <Card.Text className="text-muted mb-0">{repoDetails?.description}</Card.Text>
+              <Card.Text data-testid="repository-description" className="text-muted mb-0">
+                {repoDetails?.description}
+              </Card.Text>
 
               {!!repoDetails?.topics?.length && (
                 <Stack direction="horizontal" gap={2} className="d-flex flex-row flex-wrap mt-1">

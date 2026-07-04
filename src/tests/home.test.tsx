@@ -1,9 +1,10 @@
 import { Home } from '@/pages/home/page';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, RouterProvider } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { router } from '@/routes';
+import { RouterProviderRender } from './mocks';
 
 const HomePage = () => {
   return (
@@ -11,10 +12,6 @@ const HomePage = () => {
       <Home />
     </MemoryRouter>
   );
-};
-
-const RouterProviderRender = () => {
-  return <RouterProvider router={router} />;
 };
 
 describe('Home page', () => {

@@ -1,8 +1,15 @@
 import { useGetUserReposByUsername } from '@/api/queries/get-user-repos-by-username';
 import { api } from '@/lib/api';
-import { renderHook, screen, waitFor } from '@testing-library/react';
+import { render, renderHook, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { username, mockRepoDetails, mockUserDetails, createQueryClientMock, renderWithRouter } from './mocks';
+import {
+  username,
+  mockRepoDetails,
+  mockUserDetails,
+  createQueryClientMock,
+  renderWithRouter,
+  RouterProviderRender,
+} from './mocks';
 import { RepositoriesList } from '@/pages/repositories-list/page';
 
 vi.mock('@/lib/api', () => ({
@@ -17,6 +24,7 @@ describe('Repositories list page', () => {
   });
 
   it('should render loading state when fetching repositories', async () => {
+    render(<RouterProviderRender />);
     renderWithRouter(<RepositoriesList />, '/:username', username);
 
     const mockGetUserRepos = vi.mocked(api.get);
@@ -51,6 +59,7 @@ describe('Repositories list page', () => {
       },
     });
 
+    render(<RouterProviderRender />);
     renderWithRouter(<RepositoriesList />, '/:username', username);
 
     await waitFor(() => {
