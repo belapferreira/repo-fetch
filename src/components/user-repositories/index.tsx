@@ -50,9 +50,9 @@ export const UserRepositories = (props: UserSidebarProps) => {
   const placeholderItems = generateArray(10);
 
   return (
-    <Container className="d-flex flex-column w-100">
+    <Container className="d-flex flex-column w-100 p-0">
       <Card className="d-flex p-4 align-items-center border-0 bg-secondary bg-opacity-10 shadow-sm rounded-3">
-        <Container className="d-flex flex-row gap-4 w-100 p-0 mb-4">
+        <Container className="d-flex flex-row gap-3 w-100 p-0 mb-4 flex-wrap flex-lg-nowrap">
           <RepositorySearchForm isDisabled={isEmpty || isLoading} onSearch={handleQueryChange} />
 
           <StarsSortDropdown
@@ -83,7 +83,7 @@ export const UserRepositories = (props: UserSidebarProps) => {
                     key={repo.id}
                     className="d-flex flex-column p-0 gap-2 border-bottom border-secondary border-opacity-25 pb-3"
                   >
-                    <Stack direction="horizontal" gap={2}>
+                    <Stack direction="horizontal" gap={2} className="flex-wrap">
                       <Link to={`/${username}/${repo.name}`} className="text-decoration-none">
                         <strong className="fs-6">{repo.name}</strong>
                       </Link>

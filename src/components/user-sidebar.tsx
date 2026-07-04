@@ -37,7 +37,7 @@ export const UserSidebar = (props: UserSidebarProps) => {
   const { userDetails, isLoading } = props;
 
   return (
-    <Container as="aside" className="d-flex flex-column w-100" style={{ maxWidth: '20rem' }}>
+    <aside className="d-flex flex-column w-100 user-sidebar">
       <Card className="p-4 align-items-center border-0 bg-secondary bg-opacity-10 shadow-sm rounded-3 placeholder-glow">
         {isLoading ? (
           <UserSidebarPlaceholder />
@@ -86,6 +86,6 @@ export const UserSidebar = (props: UserSidebarProps) => {
           </>
         )}
       </Card>
-    </Container>
+    </aside>
   );
 };

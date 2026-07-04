@@ -31,16 +31,16 @@ export const RepositoryDetails = (props: RepositoryDetailsProps) => {
   const { repoDetails, repoReadme, isLoadingDetails, isLoadingReadme } = props;
 
   return (
-    <Container className="d-flex flex-column w-100 placeholder-glow">
+    <Container className="d-flex flex-column w-100 placeholder-glow p-0">
       <Breadcrumbs username={username as string} repository={repository as string} />
 
       <Card className="d-flex flex-column gap-3 p-4 border-0 bg-secondary bg-opacity-10 shadow-sm rounded-3">
         {isLoadingDetails ? (
           <RepositoryDetailsPlaceholder />
         ) : (
-          <Stack direction="horizontal" gap={3} className="align-items-center">
+          <Stack direction="horizontal" gap={3} className="align-items-center flex-wrap">
             <Stack direction="vertical" gap={3}>
-              <Stack direction="horizontal" gap={2}>
+              <Stack direction="horizontal" gap={2} className="flex-wrap">
                 <Card.Title className="fs-4 fw-bold">{repoDetails?.name}</Card.Title>
 
                 <Badge pill bg="dark">
@@ -62,7 +62,7 @@ export const RepositoryDetails = (props: RepositoryDetailsProps) => {
                 )}
               </Stack>
 
-              <Card.Text className="text-muted">{repoDetails?.description}</Card.Text>
+              <Card.Text className="text-muted mb-0">{repoDetails?.description}</Card.Text>
 
               {!!repoDetails?.topics?.length && (
                 <Stack direction="horizontal" gap={2} className="d-flex flex-row flex-wrap mt-1">
@@ -94,7 +94,7 @@ export const RepositoryDetails = (props: RepositoryDetailsProps) => {
                   alt="Repositório no GitHub"
                   title="Repositório no GitHub"
                 />
-                Ver repositório no GitHub
+                Ver repo
               </Button>
             </a>
           </Stack>

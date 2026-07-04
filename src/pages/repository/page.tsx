@@ -32,8 +32,8 @@ export const Repository = () => {
   );
 
   return (
-    <section className="d-flex flex-column align-items-center py-5 h-100 flex-grow-1">
-      <Container className="mb-5">
+    <section className="d-flex flex-column align-items-center pt-3 pb-5 h-100 flex-grow-1">
+      <Container className="mb-5 p-0">
         <RepositoryDetails
           repoDetails={repoDetails as RepositoryType}
           isLoadingDetails={isLoadingRepoDetails}

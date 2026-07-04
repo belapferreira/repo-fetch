@@ -9,15 +9,7 @@ export const AppLayout = () => {
       <div className="d-flex flex-column min-vh-100">
         <Header />
 
-        <main
-          className="d-flex flex-column flex-grow-1 h-100"
-          style={{
-            backgroundImage: 'url(./src/assets/background-with-github-symbol.png)',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: 'right',
-          }}
-        >
+        <main className="d-flex flex-column flex-grow-1 h-100 main-background px-3">
           <Outlet />
         </main>
       </div>

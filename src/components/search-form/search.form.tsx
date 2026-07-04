@@ -36,7 +36,7 @@ export const SearchForm = () => {
         <Form.Label>Username do usuário</Form.Label>
 
         <Form.Group>
-          <Container className="d-flex gap-2 px-0">
+          <Container className="d-flex gap-2 px-0 flex-column flex-sm-row">
             <InputGroup className={`input-group-${errors.username ? 'is-invalid' : ''}`}>
               <InputGroup.Text>
                 <Search size={20} />
@@ -44,7 +44,7 @@ export const SearchForm = () => {
 
               <Form.Control
                 type="text"
-                placeholder="Digite o username do usuário no Github"
+                placeholder="Username do usuário no Github"
                 {...register('username')}
                 className={errors.username ? 'is-invalid' : ''}
               />

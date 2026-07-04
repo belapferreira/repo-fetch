@@ -13,6 +13,26 @@ body {
   font-family: 'Mona Sans', 'Open Sans', sans-serif;
 }
 
+.main-background {
+  background-image: url("./assets/background-desktop.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right bottom;
+}
+
+@media (max-width: 991.98px) {
+  .main-background {
+    background-image: url("./assets/background-mobile.png");
+    background-position: center bottom;
+  }
+}
+
+@media (min-width: 768px) {
+  .user-sidebar {
+    max-width: 20rem;
+  }
+}
+
 .breadcrumb-item {
   display: inline-flex;
   align-items: center;

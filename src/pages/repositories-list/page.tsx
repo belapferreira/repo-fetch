@@ -66,8 +66,8 @@ export const RepositoriesList = () => {
   };
 
   return (
-    <section className="d-flex flex-column align-items-center py-5 h-100 flex-grow-1">
-      <Container className="mb-5 d-flex flex-column flex-md-row">
+    <section className="d-flex flex-column align-items-center pb-5 pt-4 h-100 flex-grow-1">
+      <Container className="mb-5 w-100 d-flex flex-column align-items-center align-items-md-start gap-3 flex-md-row p-0">
         <UserSidebar userDetails={userDetails as UserDetails} isLoading={isLoadingUserDetails} />
 
         <UserRepositories
