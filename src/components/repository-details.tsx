@@ -1,5 +1,5 @@
 import type { Repository, RepositoryReadme } from '@/@types';
-import { Star } from 'lucide-react';
+import { FolderOpen, Star } from 'lucide-react';
 import { Badge, Breadcrumb, Button, Card, Container, Image, Stack } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
@@ -111,22 +111,34 @@ export const RepositoryDetails = (props: RepositoryDetailsProps) => {
 
       <Card className="d-flex flex-column gap-3 p-4 border-0 bg-secondary bg-opacity-10 shadow-sm rounded-3 mt-3">
         <Card.Title className="fs-6 pb-3 border-bottom border-secondary border-opacity-25">README</Card.Title>
-        {!isLoadingReadme && (
-          <Markdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-            components={{
-              img({ src, ...props }) {
-                const imageSrc = src?.startsWith('http')
-                  ? src
-                  : `https://raw.githubusercontent.com/${username}/${repository}/HEAD/${src}`;
+        {isLoadingReadme ? (
+          <div className="placeholder w-100 mb-2" style={{ height: '40rem' }} />
+        ) : (
+          <>
+            {repoReadme?.content ? (
+              <Markdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+                components={{
+                  img({ src, ...props }) {
+                    const imageSrc = src?.startsWith('http')
+                      ? src
+                      : `https://raw.githubusercontent.com/${username}/${repository}/HEAD/${src}`;
 
-                return <img {...props} src={imageSrc} />;
-              },
-            }}
-          >
-            {repoReadme?.content}
-          </Markdown>
+                    return <img {...props} src={imageSrc} />;
+                  },
+                }}
+              >
+                {repoReadme?.content}
+              </Markdown>
+            ) : (
+              <Container className="d-flex flex-column align-items-center justify-content-center gap-2 w-100 text-muted p-5">
+                <FolderOpen size={32} />
+
+                <p>README do repositório indisponível</p>
+              </Container>
+            )}
+          </>
         )}
       </Card>
     </Container>

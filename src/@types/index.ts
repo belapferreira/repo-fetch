@@ -24,6 +24,11 @@ export interface Repository {
   } | null;
 }
 
+export interface RepositoryReadme {
+  content: string;
+  encoding: string;
+}
+
 export interface UserReposSearchResponse {
   total_count: number;
   items: Repository[];
