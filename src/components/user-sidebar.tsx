@@ -7,6 +7,32 @@ type UserSidebarProps = {
   isLoading?: boolean;
 };
 
+const UserSidebarPlaceholder = () => {
+  return (
+    <>
+      <div
+        className="placeholder rounded-circle mb-3"
+        style={{
+          width: 160,
+          height: 160,
+        }}
+      />
+
+      <div className="placeholder col-6 mb-2" />
+
+      <div className="placeholder col-4 mb-3" />
+
+      <div className="placeholder col-12 mb-2" />
+
+      <div className="placeholder col-10 mb-2" />
+
+      <div className="placeholder col-12 mb-2" />
+
+      <div className="placeholder col-10 mb-2" />
+    </>
+  );
+};
+
 export const UserSidebar = (props: UserSidebarProps) => {
   const { userDetails, isLoading } = props;
 
@@ -14,27 +40,7 @@ export const UserSidebar = (props: UserSidebarProps) => {
     <Container as="aside" className="d-flex flex-column w-100" style={{ maxWidth: '20rem' }}>
       <Card className="p-4 align-items-center border-0 bg-secondary bg-opacity-10 shadow-sm rounded-3 placeholder-glow">
         {isLoading ? (
-          <>
-            <div
-              className="placeholder rounded-circle mb-3"
-              style={{
-                width: 160,
-                height: 160,
-              }}
-            />
-
-            <div className="placeholder col-6 mb-2" />
-
-            <div className="placeholder col-4 mb-3" />
-
-            <div className="placeholder col-12 mb-2" />
-
-            <div className="placeholder col-10 mb-2" />
-
-            <div className="placeholder col-12 mb-2" />
-
-            <div className="placeholder col-10 mb-2" />
-          </>
+          <UserSidebarPlaceholder />
         ) : (
           <>
             <a href={userDetails?.html_url} title={userDetails?.html_url} target="_blank" rel="noopener noreferrer">

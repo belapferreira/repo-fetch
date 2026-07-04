@@ -1,8 +1,9 @@
 import type { UserRepos } from '@/@types';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight, FolderOpen, Star } from 'lucide-react';
 import { Badge, Button, Card, Container, Stack } from 'react-bootstrap';
 import { RepositorySearchForm } from './repository-search.form';
 import { StarsSortDropdown } from './stars-sort.dropdown';
+import { generateArray } from '@/utils/generate-array';
 
 type UserSidebarProps = {
   userRepos: UserRepos[];
@@ -13,8 +14,24 @@ type UserSidebarProps = {
   handleNextPage?: () => void;
 };
 
+const UserRepositoriesPlaceholder = () => {
+  return (
+    <Container className="d-flex flex-column p-0 gap-2 border-bottom border-secondary border-opacity-25 pb-3 placeholder-glow">
+      <div className="placeholder w-50 mb-2" />
+
+      <div className="placeholder w-75 mb-2" />
+
+      <div className="placeholder w-25 mb-2" />
+    </Container>
+  );
+};
+
 export const UserRepositories = (props: UserSidebarProps) => {
   const { userRepos, isLoading, hasPreviousPage, hasNextPage, handlePreviousPage, handleNextPage } = props;
+
+  const isEmpty = !userRepos?.length && !isLoading;
+
+  const placeholderItems = generateArray(10);
 
   return (
     <Container className="d-flex flex-column w-100">
@@ -25,14 +42,22 @@ export const UserRepositories = (props: UserSidebarProps) => {
           <StarsSortDropdown />
         </Container>
 
-        <Container className="d-flex flex-column gap-4 mt-3 w-100 p-0">
+        {isLoading ? (
+          <Container className="d-flex flex-column gap-4 mt-3 w-100 p-0">
+            {placeholderItems.map((item) => (
+              <UserRepositoriesPlaceholder key={item} />
+            ))}
+          </Container>
+        ) : (
           <>
-            {isLoading ? (
-              <>
-                {/* TODO: Placeholder */}
-              </>
+            {isEmpty ? (
+              <Container className="d-flex flex-column align-items-center justify-content-center gap-2 w-100 text-muted p-5">
+                <FolderOpen size={32} />
+
+                <p>Nenhum repositório encontrado para o username informado</p>
+              </Container>
             ) : (
-              <>
+              <Container className="d-flex flex-column gap-4 mt-3 w-100 p-0">
                 {userRepos?.map((repo) => (
                   <Container key={repo.id} className="d-flex flex-column p-0 gap-2 border-bottom border-secondary border-opacity-25 pb-3">
                     <Stack direction="horizontal" gap={2}>
@@ -68,26 +93,28 @@ export const UserRepositories = (props: UserSidebarProps) => {
                     )}
                   </Container>
                 ))}
-              </>
+
+              </Container >
             )}
           </>
-
-        </Container>
+        )}
       </Card>
 
-      <Container className="d-flex gap-3 mt-2 p-0 justify-content-center flex-wrap">
-        <Button variant="link" disabled={!hasPreviousPage} onClick={handlePreviousPage} className="d-flex gap-1 align-items-center text-decoration-none">
-          <ChevronLeft size={16} />
+      {!isEmpty && (
+        <Container className="d-flex gap-3 mt-2 p-0 justify-content-center flex-wrap">
+          <Button variant="link" disabled={!hasPreviousPage} onClick={handlePreviousPage} className="d-flex gap-1 align-items-center text-decoration-none">
+            <ChevronLeft size={16} />
 
-          Anterior
-        </Button>
+            Anterior
+          </Button>
 
-        <Button variant="link" disabled={!hasNextPage} onClick={handleNextPage} className="d-flex gap-1 align-items-center text-decoration-none">
-          Seguinte
+          <Button variant="link" disabled={!hasNextPage} onClick={handleNextPage} className="d-flex gap-1 align-items-center text-decoration-none">
+            Seguinte
 
-          <ChevronRight size={16} />
-        </Button>
-      </Container>
+            <ChevronRight size={16} />
+          </Button>
+        </Container>
+      )}
     </Container>
   );
 };
