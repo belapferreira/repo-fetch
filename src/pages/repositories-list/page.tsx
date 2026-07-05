@@ -25,10 +25,11 @@ export const RepositoriesList = () => {
     navigate(`/user/${username}/not-found`, { replace: true });
   }
 
-  const { data: userRepos, isLoading: isLoadingUserRepos } = useGetUserReposByUsername(
-    { username: username as string, page, order, query },
-    { enabled: !!username },
-  );
+  const {
+    data: userRepos,
+    isLoading: isLoadingUserRepos,
+    error: errorUserRepos,
+  } = useGetUserReposByUsername({ username: username as string, page, order, query }, { enabled: !!username });
 
   const totalPages = userRepos?.total_count ? Math.ceil(userRepos.total_count / 10) : 0; // 10 items per page
 
@@ -69,6 +70,7 @@ export const RepositoriesList = () => {
         <UserRepositories
           userRepos={userRepos?.items as Repository[]}
           currentOrder={order}
+          errorUserRepos={errorUserRepos}
           isLoading={isLoadingUserRepos}
           hasPreviousPage={hasPreviousPage}
           hasNextPage={hasNextPage}

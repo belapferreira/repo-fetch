@@ -39,7 +39,7 @@ export const RepositorySearchForm = (props: RepositorySearchFormProps) => {
       },
       [onSearch],
     ),
-    300,
+    500,
   );
 
   useEffect(() => {

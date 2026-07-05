@@ -1,5 +1,5 @@
 import type { Repository } from '@/@types';
-import { ChevronLeft, ChevronRight, FolderOpen, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CircleX, FolderOpen, Star } from 'lucide-react';
 import { Badge, Button, Card, Container, Stack } from 'react-bootstrap';
 import { RepositorySearchForm } from './repository-search.form';
 import { StarsSortDropdown } from './stars-sort.dropdown';
@@ -8,8 +8,9 @@ import { Link, useParams } from 'react-router-dom';
 
 type UserSidebarProps = {
   userRepos: Repository[];
-  isLoading?: boolean;
   currentOrder?: 'asc' | 'desc';
+  errorUserRepos?: unknown;
+  isLoading?: boolean;
   hasPreviousPage?: boolean;
   hasNextPage?: boolean;
   handlePreviousPage?: () => void;
@@ -34,6 +35,7 @@ export const UserRepositories = (props: UserSidebarProps) => {
   const {
     userRepos,
     isLoading,
+    errorUserRepos,
     currentOrder,
     hasPreviousPage,
     hasNextPage,
@@ -45,7 +47,12 @@ export const UserRepositories = (props: UserSidebarProps) => {
 
   const { username } = useParams();
 
-  const isEmpty = !userRepos?.length && !isLoading;
+  const isEmpty = !userRepos?.length && !isLoading && !errorUserRepos;
+
+  const userReposErrorMessage =
+    (errorUserRepos as { response: { status: number } })?.response?.status === 404
+      ? 'Nenhum repositório encontrado para o username informado'
+      : 'Ocorreu um erro ao buscar os repositórios do usuário';
 
   const placeholderItems = generateArray(10);
 
@@ -70,6 +77,13 @@ export const UserRepositories = (props: UserSidebarProps) => {
           </Container>
         ) : (
           <>
+            {!!errorUserRepos && (
+              <Container className="d-flex flex-column align-items-center justify-content-center gap-2 w-100 text-muted p-5">
+                <CircleX size={32} />
+                <p>{userReposErrorMessage}</p>
+              </Container>
+            )}
+
             {isEmpty ? (
               <Container className="d-flex flex-column align-items-center justify-content-center gap-2 w-100 text-muted p-5">
                 <FolderOpen size={32} />
