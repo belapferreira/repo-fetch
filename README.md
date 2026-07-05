@@ -91,7 +91,7 @@ git clone https://github.com/belapferreira/repo-fetch.git
 
 1. Abra o código clonado, duplique o arquivo `.env.example` e renomeie para `.env.local`. 
 
-2. Confirme que a URL da API do GitHub existe na variável `VITE_API_URL`. Se não existir, é necessário incluir.
+2. Confirme que a URL da API do GitHub existe na variável `VITE_API_URL`. Se não existir, é necessário incluir e verifique também a variável `VITE_APP_URL`, atualizando-a se necessário.
 
 3. No seu terminal navegue até a pasta onde você clonou o repositório e execute os seguintes comandos:
 
