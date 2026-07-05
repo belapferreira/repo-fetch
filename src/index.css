@@ -16,7 +16,7 @@ body {
 .main-background {
   background-image: url("./assets/background-desktop.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: right bottom;
 }
 
