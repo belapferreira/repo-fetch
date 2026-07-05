@@ -9,10 +9,6 @@ export const Repository = () => {
   const { username, repository } = useParams();
   const navigate = useNavigate();
 
-  if (!repository || !username) {
-    navigate(`/repository/${repository}/not-found`, { replace: true });
-  }
-
   const {
     data: repoDetails,
     isLoading: isLoadingRepoDetails,
@@ -23,7 +19,7 @@ export const Repository = () => {
   );
 
   if (isErrorRepoDetails) {
-    navigate(`/repository/${username}/not-found`, { replace: true });
+    navigate(`/${username}/${repository}/not-found`, { replace: true });
   }
 
   const { data: readme, isLoading: isLoadingReadme } = useGetRepositoryReadmeByName(

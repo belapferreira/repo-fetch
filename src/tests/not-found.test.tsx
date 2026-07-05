@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, RouterProvider } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { router } from '@/routes';
 import { NotFound } from '@/pages/not-found/page';
+import { RouterProviderRender } from './mocks';
 
 const NotFoundPage = () => {
   return (
@@ -11,10 +12,6 @@ const NotFoundPage = () => {
       <NotFound />
     </MemoryRouter>
   );
-};
-
-const RouterProviderRender = () => {
-  return <RouterProvider router={router} />;
 };
 
 describe('Not found page', () => {

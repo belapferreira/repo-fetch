@@ -12,6 +12,7 @@ export async function getUserDetailsByUsername(params: UserDetailsByUsernamePayl
   const { username } = params;
 
   const response = await api.get<UserDetails>(`/users/${username}`);
+
   return response.data;
 }
 

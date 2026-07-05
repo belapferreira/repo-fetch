@@ -1,7 +1,6 @@
 import { AppLayout } from '@/layouts/app.layout';
-import { queryClient } from '@/providers/query-client.provider';
 import { router } from '@/routes';
-import { QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
@@ -33,9 +32,18 @@ export const mockRepoDetails = {
   license: null,
 };
 
+export const createQueryClient = () =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
 export const createQueryClientMock = () => {
   return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={createQueryClient()}>{children}</QueryClientProvider>
   );
 };
 
@@ -57,7 +65,14 @@ export const renderWithRouter = (ui: ReactNode, path: string, route: string) => 
     },
   );
 
-  return render(<RouterProvider router={router} />);
+  return {
+    router,
+    ...render(
+      <QueryClientProvider client={createQueryClient()}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>,
+    ),
+  };
 };
 
 export const RouterProviderRender = () => {

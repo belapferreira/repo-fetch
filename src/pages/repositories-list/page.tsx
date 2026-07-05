@@ -15,10 +15,6 @@ export const RepositoriesList = () => {
   const { username } = useParams();
   const navigate = useNavigate();
 
-  if (!username) {
-    navigate(`/user/${username}/not-found`, { replace: true });
-  }
-
   const {
     data: userDetails,
     isLoading: isLoadingUserDetails,

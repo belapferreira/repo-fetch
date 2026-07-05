@@ -1,15 +1,8 @@
 import { useGetUserReposByUsername } from '@/api/queries/get-user-repos-by-username';
 import { api } from '@/lib/api';
-import { render, renderHook, screen, waitFor } from '@testing-library/react';
+import { cleanup, renderHook, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import {
-  username,
-  mockRepoDetails,
-  mockUserDetails,
-  createQueryClientMock,
-  renderWithRouter,
-  RouterProviderRender,
-} from './mocks';
+import { username, mockRepoDetails, mockUserDetails, createQueryClientMock, renderWithRouter } from './mocks';
 import { RepositoriesList } from '@/pages/repositories-list/page';
 
 vi.mock('@/lib/api', () => ({
@@ -20,19 +13,19 @@ vi.mock('@/lib/api', () => ({
 
 describe('Repositories list page', () => {
   beforeEach(() => {
+    cleanup();
     vi.clearAllMocks();
   });
 
   it('should render loading state when fetching repositories', async () => {
-    render(<RouterProviderRender />);
-    renderWithRouter(<RepositoriesList />, '/:username', username);
-
     const mockGetUserRepos = vi.mocked(api.get);
     const mockGetUserDetails = vi.mocked(api.get);
 
-    mockGetUserDetails.mockResolvedValue({ data: {}, isLoading: true });
+    mockGetUserDetails.mockResolvedValueOnce({ data: {}, isLoading: true });
 
-    mockGetUserRepos.mockResolvedValue({ data: {}, isLoading: true });
+    mockGetUserRepos.mockResolvedValueOnce({ data: {}, isLoading: true });
+
+    renderWithRouter(<RepositoriesList />, '/:username', username);
 
     const { result } = renderHook(() => useGetUserReposByUsername({ username }), {
       wrapper: createQueryClientMock(),
@@ -46,20 +39,32 @@ describe('Repositories list page', () => {
     });
   });
 
+  it('should redirect to error page when user details return an error', async () => {
+    const mockGetUserDetails = vi.mocked(api.get);
+
+    mockGetUserDetails.mockResolvedValueOnce({ isError: true });
+
+    const { router } = renderWithRouter(<RepositoriesList />, '/:username', username);
+
+    await waitFor(() => {
+      expect(api.get).toHaveBeenCalled();
+      expect(router.state.location.pathname).toBe(`/user/${username}/not-found`);
+    });
+  });
+
   it('should render repositories list when fetching is successful', async () => {
     const mockGetUserRepos = vi.mocked(api.get);
     const mockGetUserDetails = vi.mocked(api.get);
 
-    mockGetUserDetails.mockResolvedValue({ data: mockUserDetails });
+    mockGetUserDetails.mockResolvedValueOnce({ data: mockUserDetails });
 
-    mockGetUserRepos.mockResolvedValue({
+    mockGetUserRepos.mockResolvedValueOnce({
       data: {
         items: [mockRepoDetails],
         total_count: 1,
       },
     });
 
-    render(<RouterProviderRender />);
     renderWithRouter(<RepositoriesList />, '/:username', username);
 
     await waitFor(() => {

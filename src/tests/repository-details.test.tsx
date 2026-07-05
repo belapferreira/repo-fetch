@@ -1,14 +1,7 @@
 import { api } from '@/lib/api';
-import { render, renderHook, screen, waitFor } from '@testing-library/react';
+import { renderHook, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import {
-  username,
-  repository,
-  mockRepoDetails,
-  createQueryClientMock,
-  renderWithRouter,
-  RouterProviderRender,
-} from './mocks';
+import { username, repository, mockRepoDetails, createQueryClientMock, renderWithRouter } from './mocks';
 import { Repository } from '@/pages/repository/page';
 import { useGetRepositoryByName } from '@/api/queries/get-repo-details-by-name';
 
@@ -24,7 +17,6 @@ describe('Repository details page', () => {
   });
 
   it('should render loading state when fetching details', async () => {
-    render(<RouterProviderRender />);
     renderWithRouter(<Repository />, '/:username/:repository', `${username}/${repository}`);
 
     const mockGetRepositoryByName = vi.mocked(api.get);
@@ -45,12 +37,24 @@ describe('Repository details page', () => {
     });
   });
 
+  it('should redirect to error page when repository details return an error', async () => {
+    const mockGetRepositoryByName = vi.mocked(api.get);
+
+    mockGetRepositoryByName.mockResolvedValueOnce({ isError: true });
+
+    const { router } = renderWithRouter(<Repository />, '/:username/:repository', `${username}/${repository}`);
+
+    await waitFor(() => {
+      expect(api.get).toHaveBeenCalled();
+      expect(router.state.location.pathname).toBe(`/${username}/${repository}/not-found`);
+    });
+  });
+
   it('should render the repository details when fetching is successful', async () => {
     const mockGetRepositoryByName = vi.mocked(api.get);
 
     mockGetRepositoryByName.mockResolvedValue({ data: mockRepoDetails, isLoading: false });
 
-    render(<RouterProviderRender />);
     renderWithRouter(<Repository />, '/:username/:repository', `${username}/${repository}`);
 
     await waitFor(() => {
