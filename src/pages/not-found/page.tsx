@@ -1,6 +1,6 @@
 import { Card, Container } from 'react-bootstrap';
 
-import notFoundImage from '../../assets/not-found-404.svg';
+import notFoundImage from '@/assets/not-found-404.svg';
 
 export const NotFound = () => {
   return (

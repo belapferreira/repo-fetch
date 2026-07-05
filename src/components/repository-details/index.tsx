@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import { RepositoryReadme } from './repository-readme';
 import { Breadcrumbs } from './breadcrumbs';
 
+import github from '@/assets/github.svg';
+
 interface RepositoryDetailsProps {
   repoDetails: Repository;
   repoReadme?: RepositoryReadmeType;
@@ -91,13 +93,7 @@ export const RepositoryDetails = (props: RepositoryDetailsProps) => {
               className="text-decoration-none"
             >
               <Button className="d-flex flex-row align-items-center gap-2">
-                <img
-                  src="/src/assets/github.svg"
-                  width="20"
-                  height="20"
-                  alt="Repositório no GitHub"
-                  title="Repositório no GitHub"
-                />
+                <img src={github} width="20" height="20" alt="Repositório no GitHub" title="Repositório no GitHub" />
                 Ver repo
               </Button>
             </a>
