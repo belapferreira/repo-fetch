@@ -52,17 +52,21 @@ describe('Repository details page', () => {
 
   it('should render the repository details when fetching is successful', async () => {
     const mockGetRepositoryByName = vi.mocked(api.get);
+    const mockGetRepoReadme = vi.mocked(api.get);
 
     mockGetRepositoryByName.mockResolvedValue({ data: mockRepoDetails, isLoading: false });
+    mockGetRepoReadme.mockResolvedValue({ data: { content: 'SGVsbG8gV29ybGQ=' }, isLoading: false }); // Base64 for "Hello World"
 
     renderWithRouter(<Repository />, '/:username/:repository', `${username}/${repository}`);
 
     await waitFor(() => {
       const repoName = screen.getByTestId('repository-name');
       const repoDescription = screen.getByTestId('repository-description');
+      const repoReadme = screen.getByText('Hello World');
 
       expect(repoName).toBeInTheDocument();
       expect(repoDescription).toBeInTheDocument();
+      expect(repoReadme).toBeInTheDocument();
     });
   });
 });
