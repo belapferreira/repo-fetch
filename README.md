@@ -9,7 +9,7 @@
 </p>
 
 > [!IMPORTANT]
-> 👉🏻 Acesse a demo em: [repo-fetch-ivory.vercel.app](repo-fetch-ivory.vercel.app)
+> 👉🏻 Acesse a demo em: [repo-fetch-ivory.vercel.app](https://repo-fetch-ivory.vercel.app/)
 
 <p>&nbsp;</p>
 
