@@ -41,9 +41,6 @@
 
 **Repo Fetch** é uma aplicação web desenvolvida com o framework [Vite](https://vite.dev/), usa a API do GitHub [GitHub API](https://docs.github.com/en/rest) e foi criada como desafio técnico para a posição de pessoa desenvolvedora frontend.
 
-> [!NOTE]
-> Alguns _endpoints_ informados nas orientações do desafio não estavam funcionais e foram utilizados outros para buscar pelas informações necessárias e atender aos requisitos solicitados.
-
 **Principais premissas e escolhas**
 
 1) Foi usado TypeScript, pois podemos otimizar tempo de desenvolvimento com _typos_ e outros erros, o _IntelliSense funciona melhor, o que fera uma melhor experiência de desenvolvimento.
