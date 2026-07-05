@@ -134,7 +134,7 @@ Os principais recursos usados para o desenvolvimento do projeto foram:
 
 ### :memo: Licença
 
-MIT license. Acesse [LICENSE](https://github.com/belapferreira/repo-fetch/blob/master/LICENSE) para mais informações.
+MIT license. Acesse [LICENSE](https://github.com/belapferreira/repo-fetch/blob/main/LICENSE) para mais informações.
 
 ---
 
