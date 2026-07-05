@@ -11,6 +11,7 @@ type UserSidebarProps = {
   currentOrder?: 'asc' | 'desc';
   errorUserRepos?: unknown;
   isLoading?: boolean;
+  hasQuery?: boolean;
   hasPreviousPage?: boolean;
   hasNextPage?: boolean;
   handlePreviousPage?: () => void;
@@ -34,9 +35,10 @@ const UserRepositoriesPlaceholder = () => {
 export const UserRepositories = (props: UserSidebarProps) => {
   const {
     userRepos,
-    isLoading,
     errorUserRepos,
     currentOrder,
+    isLoading,
+    hasQuery,
     hasPreviousPage,
     hasNextPage,
     handlePreviousPage,
@@ -47,7 +49,7 @@ export const UserRepositories = (props: UserSidebarProps) => {
 
   const { username } = useParams();
 
-  const isEmpty = !userRepos?.length && !isLoading && !errorUserRepos;
+  const isEmpty = !userRepos?.length && !isLoading && !errorUserRepos && !hasQuery;
 
   const userReposErrorMessage =
     (errorUserRepos as { response: { status: number } })?.response?.status === 404

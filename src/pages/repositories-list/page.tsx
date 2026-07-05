@@ -72,6 +72,7 @@ export const RepositoriesList = () => {
           currentOrder={order}
           errorUserRepos={errorUserRepos}
           isLoading={isLoadingUserRepos}
+          hasQuery={!!query}
           hasPreviousPage={hasPreviousPage}
           hasNextPage={hasNextPage}
           handlePreviousPage={handlePreviousPage}

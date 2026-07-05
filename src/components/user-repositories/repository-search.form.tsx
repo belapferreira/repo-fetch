@@ -4,7 +4,7 @@ import { Search } from 'lucide-react';
 import { schema } from './repository-search.schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCallback, useEffect } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { debounce } from 'lodash';
 
 type SearchFormData = z.infer<typeof schema>;
@@ -16,6 +16,8 @@ interface RepositorySearchFormProps {
 
 export const RepositorySearchForm = (props: RepositorySearchFormProps) => {
   const { onSearch, isDisabled } = props;
+
+  const onSearchRef = useRef(onSearch);
 
   const {
     register,
@@ -30,21 +32,27 @@ export const RepositorySearchForm = (props: RepositorySearchFormProps) => {
 
   const repositoryValue = watch('repository');
 
-  const debouncedSearch = debounce(
-    useCallback(
-      (query: string) => {
-        if (onSearch) {
-          onSearch(query);
-        }
-      },
-      [onSearch],
-    ),
-    500,
+  useEffect(() => {
+    onSearchRef.current = onSearch;
+  }, [onSearch]);
+
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((query: string) => {
+        onSearchRef.current?.(query);
+      }, 500),
+    [],
   );
 
   useEffect(() => {
     debouncedSearch(repositoryValue);
   }, [repositoryValue, debouncedSearch]);
+
+  useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [debouncedSearch]);
 
   return (
     <Form className="w-100">
