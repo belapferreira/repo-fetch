@@ -43,7 +43,7 @@
 
 **Principais premissas e escolhas**
 
-1) Foi usado TypeScript, pois podemos otimizar tempo de desenvolvimento com _typos_ e outros erros, o _IntelliSense_ funciona melhor, o que fera uma melhor experiência de desenvolvimento.
+1) Foi usado TypeScript, pois podemos otimizar tempo de desenvolvimento com _typos_ e outros erros, o _IntelliSense_ funciona melhor, o que oferece uma melhor experiência de desenvolvimento.
 
 2) Foi utilizado o framework Bootstrap como solicitado nos requisitos do desafio.
 
