@@ -43,15 +43,15 @@
 
 **Principais premissas e escolhas**
 
-1) Foi usado TypeScript, pois podemos otimizar tempo de desenvolvimento com _typos_ e outros erros, o _IntelliSense funciona melhor, o que fera uma melhor experiência de desenvolvimento.
+1) Foi usado TypeScript, pois podemos otimizar tempo de desenvolvimento com _typos_ e outros erros, o _IntelliSense_ funciona melhor, o que fera uma melhor experiência de desenvolvimento.
 
 2) Foi utilizado o framework Bootstrap como solicitado nos requisitos do desafio.
 
-3) Também usei a _lib_ TanStack React Query, pois acredito que ela torna as requisições e o _caching_ das mesma mais fácil de gerir. Ela foi usada em conjunto com a _lib_ Axios, que foi informado como uma preferência de implementação.
+3) Também usei a _lib_ TanStack React Query, pois acredito que ela torna as requisições e o _caching_ das mesmas mais fáceis de gerir. Ela foi usada em conjunto com a _lib_ Axios, que foi informada como uma preferência de implementação.
 
 4) As funcionalidades foram implementadas conforme os requisitos do desafio.
 
-5) Para o _deploy_ eu uei a plataforma da Vercel porque a experiência é fluida, simples e atende às necessidades do projeto.
+5) Para o _deploy_ eu usei a plataforma da Vercel porque a experiência é fluida, simples e atende às necessidades do projeto.
 
 ### :computer: Funcionalidades
 
@@ -59,7 +59,7 @@
 
 - [x] Home page com formulário para informar o _username_ da pessoa no GitHub e buscar pelos dados;
 - [x] Página de detalhes do usuário informado com a lista dos seus repositórios;
-- [x] Funcionalidades na lista de repositórios: order por estrelas, pesquisar por repositório, buscar por mais repositórios (paginação de 10 items por página);
+- [x] Funcionalidades na lista de repositórios: ordenar por estrelas, pesquisar por repositório, buscar por mais repositórios (paginação de 10 itens por página);
 - [x] Página de detalhes do repositório;
 - [x] Página 404 para redirecionamento em caso de usuário ou repositório não encontrado;
 - [x] Utilização de rotas para navegação;
@@ -91,7 +91,7 @@ git clone https://github.com/belapferreira/repo-fetch.git
 
 1. Abra o código clonado, duplique o arquivo `.env.example` e renomeie para `.env.local`. 
 
-2. Confirme que a URL da API do GitHub existe na variável `VITE_API_URL`. Se não existir, é necessário incluir e verifique também a variável `VITE_APP_URL`, atualizando-a se necessário.
+2. Confirme que a URL da API do GitHub existe na variável `VITE_API_URL`. Se não existir, é necessário incluir e verificar também a variável `VITE_APP_URL`, atualizando-a se necessário.
 
 3. No seu terminal navegue até a pasta onde você clonou o repositório e execute os seguintes comandos:
 
